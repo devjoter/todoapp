@@ -27,11 +27,19 @@ const TaskList: React.FC<TaskListProps> = ({ tasks }) => {
     setNewTaskTitle('');
   };
 
+  const removeTask = (taskId: number) => {
+    const updatedTaskList = taskList.filter((task) => task.id !== taskId);
+    setTaskList(updatedTaskList);
+  };
+
   return (
     <div>
       <ul>
         {taskList.map((task) => (
-          <li key={task.id}>{task.title}</li>
+          <li key={task.id}>
+            {task.title}
+            <button onClick={() => removeTask(task.id)}>Usuń zadanie</button>
+          </li>
         ))}
       </ul>
       <form onSubmit={addTask}>
